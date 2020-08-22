@@ -48,8 +48,8 @@ def parse_args():
     # general
     parser.add_argument('--cfg',
                         help='experiment configure file name',
-                        # default='../experiments/deepfashion2/w48_512x384_adam_lr1e-3-agg81kps-category1-hflip-test.yaml',
-                        required=True,
+                        default='../experiments/deepfashion2/w48_512x384_adam_lr1e-3-agg81kps-category1-hflip.yaml',
+                        # required=True,
                         type=str)
 
     parser.add_argument('opts',

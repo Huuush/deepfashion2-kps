@@ -71,7 +71,9 @@ def main():
     args = parse_args()
     update_config(cfg, args)
 
-    logger, final_output_dir, tb_log_dir = create_logger(
+    # logger, final_output_dir, tb_log_dir = create_logger(
+    #     cfg, args.cfg, 'valid')
+    logger, final_output_dir = create_logger(
         cfg, args.cfg, 'valid')
 
     logger.info(pprint.pformat(args))
@@ -90,9 +92,10 @@ def main():
         logger.info('=> loading model from {}'.format(cfg.TEST.MODEL_FILE))
         model.load_state_dict(torch.load(cfg.TEST.MODEL_FILE), strict=False)
     else:
-        model_state_file = os.path.join(
-            final_output_dir, 'final_state.pth'
-        )
+        # model_state_file = os.path.join(
+        #     final_output_dir, 'final_state.pth'
+        # )
+        model_state_file = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/finetune1_model/final_state.pth'
         logger.info('=> loading model from {}'.format(model_state_file))
         model.load_state_dict(torch.load(model_state_file))
 
@@ -123,8 +126,10 @@ def main():
     )
 
     # evaluate on validation set
+    # validate(cfg, valid_loader, valid_dataset, model, criterion,
+    #          final_output_dir, tb_log_dir)
     validate(cfg, valid_loader, valid_dataset, model, criterion,
-             final_output_dir, tb_log_dir)
+             final_output_dir)
 
 
 if __name__ == '__main__':

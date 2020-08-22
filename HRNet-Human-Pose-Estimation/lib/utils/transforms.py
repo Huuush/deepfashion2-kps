@@ -39,7 +39,7 @@ def fliplr_joints(joints, joints_vis, width, matched_parts):
     # Change left-right parts
     for pair in matched_parts:
         joints[pair[0], :], joints[pair[1], :] = \
-            joints[pair[1], :], joints[pair[0], :].copy()
+            joints[pair[1], :], joints[ pair[0], :].copy()
         joints_vis[pair[0], :], joints_vis[pair[1], :] = \
             joints_vis[pair[1], :], joints_vis[pair[0], :].copy()
 
@@ -75,8 +75,11 @@ def get_affine_transform(
     dst = np.zeros((3, 2), dtype=np.float32)
     src[0, :] = center + scale_tmp * shift
     src[1, :] = center + src_dir + scale_tmp * shift
-    dst[0, :] = [dst_w * 0.5, dst_h * 0.5]
-    dst[1, :] = np.array([dst_w * 0.5, dst_h * 0.5]) + dst_dir
+    # dst[0, :] = [dst_w * 0.5, dst_h * 0.5]
+    # dst[1, :] = np.array([dst_w * 0.5, dst_h * 0.5]) + dst_dir
+    # DAEC
+    dst[0, :] = [(dst_w - 1) * 0.5, (dst_h - 1) * 0.5]
+    dst[1, :] = np.array([(dst_w - 1) * 0.5, (dst_h - 1) * 0.5]) + dst_dir
 
     src[2:, :] = get_3rd_point(src[0, :], src[1, :])
     dst[2:, :] = get_3rd_point(dst[0, :], dst[1, :])

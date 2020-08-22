@@ -16,7 +16,7 @@ import cv2
 
 from core.inference import get_max_preds
 
-
+#最终结果点保存
 def save_batch_image_with_joints(batch_image, batch_joints, batch_joints_vis,
                                  file_name, nrow=8, padding=2):
     '''
@@ -41,16 +41,22 @@ def save_batch_image_with_joints(batch_image, batch_joints, batch_joints_vis,
                 break
             joints = batch_joints[k]
             joints_vis = batch_joints_vis[k]
-
             for joint, joint_vis in zip(joints, joints_vis):
                 joint[0] = x * width + padding + joint[0]
                 joint[1] = y * height + padding + joint[1]
                 if joint_vis[0]:
-                    cv2.circle(ndarr, (int(joint[0]), int(joint[1])), 2, [255, 0, 0], 2)
+                    cv2.circle(ndarr, (int(joint[0]), int(joint[1])), 2, [255, 0, 0], 3)
+                # 说明有些点是有坐标的 但也被vis掉了
+                # if joint_vis[0] != 1 and joint[0] != 0:
+                #     cv2.circle(ndarr, (int(joint[0]), int(joint[1])), 2, [0, 0, 255], 1)
+                #     cv2.putText(ndarr, str(count), (int(joint[0]), int(joint[1])), cv2.FONT_HERSHEY_SIMPLEX,
+                #                 0.5, (0, 255, 0), 1)
+                # count += 1
+                # 当前点出自哪个通道 通道数
             k = k + 1
     cv2.imwrite(file_name, ndarr)
 
-
+#heatmap保存
 def save_batch_heatmaps(batch_image, batch_heatmaps, file_name,
                         normalize=True):
     '''

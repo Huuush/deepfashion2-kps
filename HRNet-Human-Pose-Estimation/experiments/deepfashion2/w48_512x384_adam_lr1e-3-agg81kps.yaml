@@ -125,6 +125,8 @@ TEST:
   FLIP_TEST: false # true
   POST_PROCESS: true
   SHIFT_HEATMAP: true
+#  BLUR_KERNEL: 11
+#  DECODE_MODE: "DAEC"
 DEBUG:
   DEBUG: true
   SAVE_BATCH_IMAGES_GT: false

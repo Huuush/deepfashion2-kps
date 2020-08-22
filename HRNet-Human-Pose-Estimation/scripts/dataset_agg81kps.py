@@ -20,6 +20,7 @@ def agg81kps(infile, outfile):
     with open(infile) as f:
         d = json.load(f)
     new_annotations = []
+    print(deepfashion2agg81kps_util.ori294_to_agg81kps_map)
     for ann in tqdm(d['annotations']):
         new_ann = copy.deepcopy(ann)
         ori_kps_list = ann['keypoints']
@@ -54,13 +55,13 @@ def agg81kps(infile, outfile):
 
 
 if __name__ == '__main__':
-    infile = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/lib/data/deepfashion2_zip/deepfashion2_train_full.json'
-    outfile = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/lib/data/deepfashion2_zip/annotations/train_coco_agg81kps_full.json'
-    print(f'Processing training set, in:{infile}, out:{outfile}')
-    agg81kps(infile, outfile)
+    # infile = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/lib/data/deepfashion2_zip/deepfashion2_train_full.json'
+    # outfile = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/lib/data/deepfashion2_zip/annotations/train_coco_agg81kps_full.json'
+    # print(f'Processing training set, in:{infile}, out:{outfile}')
+    # agg81kps(infile, outfile)
 
-    infile = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/lib/data/deepfashion2_zip/deepfashion2_validation_full.json'
-    outfile = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/lib/data/deepfashion2_zip/annotations/validation_coco_agg81kps_full.json'
+    infile = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/lib/data/deepfashion2_zip/annotations/instances_validation.json'
+    outfile = '/workspace/deepfashion2-kps-agg-finetune/HRNet-Human-Pose-Estimation/lib/data/deepfashion2_zip/validation_debugvis.json'
     print(f'Processing validation set, in:{infile}, out:{outfile}')
     agg81kps(infile, outfile)
 
